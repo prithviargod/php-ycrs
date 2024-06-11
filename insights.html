@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calorie Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .fact-box {
+            background-color: #f0f8ff;
+            border-left: 6px solid #007bff;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .result {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-input, .form-select, .form-submit {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .form-submit {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-submit:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function calculateCaloriesBurnt() {
+            var height = parseFloat(document.getElementById("height").value);
+            var weight = parseFloat(document.getElementById("weight").value);
+            var gender = document.getElementById("gender").value;
+            var age = parseInt(document.getElementById("age").value);
+            var duration = parseFloat(document.getElementById("duration").value);
+            var MET = 3.3; // Yoga MET value
+
+            var BMR = (gender === "male") ?
+                (88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)) :
+                (447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age));
+
+            var caloriesBurnt = MET * weight * duration;
+            document.getElementById("result").innerHTML = "Congratulations! You have burnt: <span class='result'>" + caloriesBurnt.toFixed(2) + " calories </span>";
+        }
+    </script>
+</head>
+
+<body>
+    <h2 style="color: #007bff;">Calorie Calculator</h2>
+    <br>
+    <div class="fact-box">
+        <p><strong>What are calories?</strong> Calories are a measure of energy. They refer to the amount of energy that food provides to your body, which is used for basic functions and physical activities.</p>
+    </div>
+    
+    <p>Estimate your calories burnt during a yoga session:</p>
+<br>
+    <form onsubmit="event.preventDefault(); calculateCaloriesBurnt();">
+        <div class="form-group">
+            <label for="height" class="form-label">Height (cm):</label>
+            <input type="number" id="height" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="weight" class="form-label">Weight (kg):</label>
+            <input type="number" id="weight" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="gender" class="form-label">Gender:</label>
+            <select id="gender" class="form-select">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age" class="form-label">Age:</label>
+            <input type="number" id="age" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="duration" class="form-label">Duration (hours):</label>
+            <input type="number" id="duration" class="form-input" required>
+        </div>
+        <input type="submit" value="Calculate" class="form-submit">
+    </form>
+    <p id="result"></p>
+    <br>
+    <div class="fact-box">
+        <p><strong>Benefits of burning calories:</strong></p>
+        <ul>
+            <li><strong>Weight Management:</strong> Helps maintain or lose weight.</li>
+            <li><strong>Improved Health:</strong> Reduces the risk of chronic diseases.</li>
+            <li><strong>Increased Energy:</strong> Boosts energy levels and mood.</li>
+            <li><strong>Better Sleep:</strong> Enhances sleep quality.</li>
+        </ul>
+    </div>
+</body>
+</html>

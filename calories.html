@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Score Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .fact-box {
+            background-color: #f0f8ff;
+            border-left: 6px solid #007bff;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .result {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-input, .form-select, .form-submit {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .form-submit {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-submit:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function calculateHealthScore() {
+            var age = parseInt(document.getElementById('age').value);
+            var gender = document.getElementById('gender').value;
+            var height = parseInt(document.getElementById('height').value);
+            var weight = parseInt(document.getElementById('weight').value);
+            var fruitVegServings = parseInt(document.getElementById('fruitVegServings').value);
+            var physicalActivityHours = parseInt(document.getElementById('physicalActivityHours').value);
+            var sleepHours = parseInt(document.getElementById('sleepHours').value);
+            var smokeCigarettes = parseInt(document.getElementById('smokeCigarettes').value || 0);
+            var alcoholDrinks = parseInt(document.getElementById('alcoholDrinks').value || 0);
+            var chronicDiseases = document.getElementById('chronicDiseases').value;
+            var medications = document.getElementById('medications').value;
+            var surgeries = document.getElementById('surgeries').value;
+            var stressLevel = parseInt(document.getElementById('stressLevel').value);
+            var anxietyDepression = document.getElementById('anxietyDepression').value;
+            var wearableData = document.getElementById('wearableData').value;
+
+            // Basic health score calculation (example)
+            var healthScore = 100;
+            healthScore -= (age - 20) / 2;
+            healthScore += fruitVegServings * 2;
+            healthScore += physicalActivityHours * 3;
+            healthScore += sleepHours * 2;
+            healthScore -= smokeCigarettes * 5;
+            healthScore -= alcoholDrinks * 2;
+            healthScore -= stressLevel * 2;
+            healthScore -= (anxietyDepression == 'yes' ? 10 : 0);
+            healthScore -= (chronicDiseases == 'yes' ? 20 : 0);
+            healthScore -= (medications != '' ? 10 : 0);
+            healthScore -= (surgeries != '' ? 15 : 0);
+
+            // Display the health score
+            document.getElementById('healthScoreResult').innerText = 'Your Health Score is: ' + healthScore;
+        }
+    </script>
+</head>
+<body>
+    <h1>Health Score Assessment</h1>
+    <form id="healthScoreForm">
+        <h2>Basic Information:</h2>
+        <p>What is your age? <input type="number" id="age" required></p>
+        <p>What is your gender? <input type="text" id="gender" required></p>
+        <p>What is your height? <input type="number" id="height" required></p>
+        <p>What is your weight? <input type="number" id="weight" required></p>
+
+        <h2>Lifestyle Habits:</h2>
+        <p>How many servings of fruits and vegetables do you consume daily? <input type="number" id="fruitVegServings" required></p>
+        <p>How many hours of physical activity do you engage in each week? <input type="number" id="physicalActivityHours" required></p>
+        <p>How many hours of sleep do you get on average per night? <input type="number" id="sleepHours" required></p>
+        <p>Do you smoke? If yes, how many cigarettes per day? <input type="number" id="smokeCigarettes" placeholder="Enter 0 if you don't smoke"></p>
+        <p>Do you consume alcohol? If yes, how many drinks per week? <input type="number" id="alcoholDrinks" placeholder="Enter 0 if you don't drink"></p>
+
+        <h2>Medical History:</h2>
+        <p>Do you have any chronic diseases or conditions (e.g., diabetes, hypertension, heart disease)? <input type="text" id="chronicDiseases" required></p>
+        <p>Are you currently taking any medications? If yes, please list them. <input type="text" id="medications"></p>
+        <p>Have you had any surgeries or hospitalizations in the past year? If yes, please provide details. <input type="text" id="surgeries"></p>
+
+        <h2>Mental Well-being:</h2>
+        <p>On a scale of 1 to 10, how would you rate your overall stress level? <input type="number" id="stressLevel" required></p>
+        <p>Do you experience symptoms of anxiety or depression? If yes, how often? <input type="text" id="anxietyDepression" required></p>
+
+        <h2>Wearable Device Data (if applicable):</h2>
+        <p>Please sync your wearable device to share data such as daily step count, heart rate, and sleep patterns. <input type="text" id="wearableData"></p>
+
+        <button type="button" onclick="calculateHealthScore()">Calculate Health Score</button>
+    </br>
+    </form>
+    <div id="healthScoreResult"></div>
+</body>
+</html>
